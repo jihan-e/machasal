@@ -10,7 +10,8 @@
             --text-color: #2c3e50;
             --input-bg: #ffffff;
             --btn-bg: #eeeeee;
-            --primary-color: #e74c3c;
+            --future-color: #e74c3c;
+            --past-color: #3498db;
         }
         .dark-mode {
             --bg-color: #1a1a1a;
@@ -42,7 +43,7 @@
             border: 2px solid #ccc;
             border-radius: 8px;
             margin-bottom: 10px;
-            box-sizing: border-box; /* 패딩 포함 크기 계산 */
+            box-sizing: border-box;
         }
         button { 
             padding: 15px 30px; 
@@ -61,7 +62,7 @@
             margin-top: 30px; 
             font-size: 32px; 
             font-weight: bold; 
-            color: var(--primary-color);
+            line-height: 1.5;
         }
         .mode-toggle {
             position: absolute;
@@ -71,6 +72,15 @@
             padding: 8px 15px;
             font-size: 14px;
         }
+        .sub-text {
+            font-size: 18px;
+            font-weight: normal;
+            display: block;
+            margin-top: 10px;
+            color: var(--text-color);
+        }
+        .future { color: var(--future-color); }
+        .past { color: var(--past-color); }
     </style>
 </head>
 <body>
@@ -109,12 +119,17 @@
             const dDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
             const resultDiv = document.getElementById('result');
+            
+            resultDiv.classList.remove('future', 'past');
+
             if (dDay > 0) {
-                resultDiv.innerText = "D-" + dDay;
+                resultDiv.classList.add('future');
+                resultDiv.innerHTML = "D-" + dDay;
             } else if (dDay === 0) {
-                resultDiv.innerText = "D-Day! 바로 오늘입니다.";
+                resultDiv.innerHTML = "D-Day!<br><span class='sub-text'>―순간아, 멈추어라. 너 정말 아름답구나!</span>";
             } else {
-                resultDiv.innerText = "D+" + Math.abs(dDay) + " (이미 지난 날짜입니다)";
+                resultDiv.classList.add('past');
+                resultDiv.innerHTML = "D+" + Math.abs(dDay) + "<br><span class='sub-text'>(재시도 1회 이용 2.0 포인트)</span>";
             }
         }
     </script>
