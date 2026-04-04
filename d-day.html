@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-DAY</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #2c3e50;
+            --input-bg: #ffffff;
+            --btn-bg: #eeeeee;
+            --primary-color: #e74c3c; /* 디데이는 주로 붉은 계열을 사용하죠 */
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --input-bg: #333333;
+            --btn-bg: #444444;
+        }
+
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Pretendard', sans-serif; 
+            text-align: center; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 15vh;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        input { 
+            padding: 12px; 
+            font-size: 16px;
+            width: 80%; 
+            max-width: 300px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        button { 
+            padding: 15px 30px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            background-color: var(--btn-bg);
+            color: var(--text-color);
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        #result { 
+            margin-top: 30px; 
+            font-size: 32px; 
+            font-weight: bold; 
+            color: var(--primary-color);
+        }
+        
+        .mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: auto;
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="mode-toggle" onclick="toggleDarkMode()">다크 모드</button>
+
+    <h2>목표 날짜를 선택하세요</h2>
+    <p>남은 시간을 계산합니다</p>
+
+    <input type="date" id="targetDate">
+    <button onclick="calculateDDay()">남은 기간 계산하기</button>
+
+    <div id="result"></div>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.mode-toggle');
+            btn.innerText = body.classList.contains('dark-mode') ? "라이트 모드" : "다크 모드";
+        }
+
+        function calculateDDay() {
+            const inputDate = document.getElementById('targetDate').value;
+            if (!inputDate) {
+                alert("날짜를 먼저 선택해 주세요.");
+                return;
+            }
+
+            const now = new Date(); // 현재 시간
+            const target = new Date(inputDate); // 사용자가 선택한 시간
+            
+            // 두 날짜의 차이를 '밀리초(ms)' 단위로 계산합니다.
+            const diff = target - now;
+
+            // 밀리초를 '일' 단위로 변환합니다.
+            // 1일 = 24시간 * 60분 * 60초 * 1000밀리초
+            const dDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+            const resultDiv = document.getElementById('result');
+            if (dDay > 0) {
+                resultDiv.innerText = "D-" + dDay;
+            } else if (dDay === 0) {
+                resultDiv.innerText = "D-Day! 바로 오늘입니다.";
+            } else {
+                resultDiv.innerText = "D+" + Math.abs(dDay) + " (이미 지난 날짜입니다)";
+            }
+        }
+    </script>
+</body>
+</html>
