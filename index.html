@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 차살 문장</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #2c3e50;
+            --input-bg: #ffffff;
+            --btn-bg: #eeeeee;
+            --primary-color: #3498db;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --input-bg: #333333;
+            --btn-bg: #444444;
+        }
+
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Pretendard', sans-serif; 
+            text-align: center; 
+            padding: 20px; 
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 15vh;
+            min-height: 100vh;
+        }
+
+        input { 
+            padding: 12px; 
+            font-size: 16px;
+            width: 80%; 
+            max-width: 300px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button { 
+            padding: 15px 30px; 
+            font-size: 18px; 
+            cursor: pointer; 
+            background-color: var(--btn-bg);
+            color: var(--text-color);
+            border: 1px solid #888;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 300px;
+            transition: transform 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #result { 
+            margin-top: 30px; 
+            font-size: 28px; 
+            font-weight: bold; 
+            word-break: keep-all;
+        }
+        
+        .mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: auto;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            h2 { font-size: 1.5rem; }
+            p { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="mode-toggle" onclick="toggleDarkMode()">다크 모드</button>
+
+    <h2>1부터 N까지 랜덤 출력</h2>
+    <p>숫자를 입력하여 오늘의 차살 문장을 찾아봅시다</p>
+
+    <input type="number" id="maxNumber" placeholder="숫자 입력" min="1">
+    <button onclick="generateRandom()">추첨하기</button>
+
+    <div id="result"></div>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.mode-toggle');
+            btn.innerText = body.classList.contains('dark-mode') ? "라이트 모드" : "다크 모드";
+        }
+
+        function generateRandom() {
+            const input = document.getElementById('maxNumber').value;
+            const n = parseInt(input);
+
+            if (isNaN(n) || n < 1) {
+                alert("좁은 문으로 들어가라. 1 이상으로 다시 입력하고 이 기억은 잊을 것.");
+                return;
+            }
+
+            const randomNumber = Math.floor(Math.random() * n) + 1;
+            document.getElementById('result').innerText = "결과: " + randomNumber;
+        }
+    </script>
+
+</body>
+</html>
