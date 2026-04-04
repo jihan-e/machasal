@@ -65,6 +65,14 @@
             font-size: 28px;
             font-weight: bold;
             word-break: keep-all;
+            line-height: 1.6;
+        }
+        .sub-text {
+            display: block;
+            font-size: 20px;
+            font-weight: normal;
+            margin-top: 5px;
+            color: var(--primary-color);
         }
         .mode-toggle {
             position: absolute;
@@ -103,8 +111,24 @@
                 alert("좁은 문으로 들어가라. 1 이상으로 다시 입력하고 이 기억은 잊을 것.");
                 return;
             }
+            
             const resultNumber = Math.floor(Math.random() * n) + 1;
-            document.getElementById('result').innerText = resultNumber + "화";
+            const resultDiv = document.getElementById('result');
+
+            let extraText = "";
+            
+            // if (resultNumber === 1) {
+            //     extraText = "Chapter 0. 모든 시작은 어렵다";
+            // } else if (resultNumber >= 2 && resultNumber <= 7) {
+            //     extraText = "Chapter 1. 너 자신을 도우면, 신도 너를 돕는다 (1)";
+            // } else if (resultNumber >= 8 && resultNumber <= 14) {
+            //     extraText = "Chapter 2. 너 자신을 도우면, 신도 너를 돕는다 (2)";
+            // } else if (resultNumber >= 15 && resultNumber <= 21) {
+            //     extraText = "Chapter 3. 끊임없는 물방울이 돌을 뚫는다 (1)";
+            // }
+
+            const finalSubText = extraText ? `<span class='sub-text'>${extraText}</span>` : "";
+            resultDiv.innerHTML = resultNumber + "화" + finalSubText;
         }
     </script>
 </body>
