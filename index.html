@@ -103,7 +103,8 @@
                 alert("좁은 문으로 들어가라. 1 이상으로 다시 입력하고 이 기억은 잊을 것.");
                 return;
             }
-            // 이후 랜덤 로직 생략 (기존 코드 유지)
+            const resultNumber = Math.floor(Math.random() * n) + 1;
+            document.getElementById('result').innerText = resultNumber + "화";
         }
     </script>
 </body>
