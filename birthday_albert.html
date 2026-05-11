@@ -6,7 +6,6 @@
     <title>너의 내일을 기대해</title>
     <style>
         body {
-            transform: translateY(-100px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -16,6 +15,10 @@
             font-family: sans-serif;
             background-color: #f0f0f0;
             text-align: center;
+            position: relative;
+        }
+        .content {
+            transform: translateY(-100px);
         }
         h1 {
             font-size: 2rem;
@@ -27,13 +30,20 @@
             color: #666;
             margin: 5px 0;
         }
+        #badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
     </style>
 </head>
 <body>
-    <h2 id="current-date"></h2>
-    <h1>알버트 생일 축하해!</h1>
-    
-    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjihan-e.github.io%2Fmachasal%2Fbirthday_albert.html&count_bg=%2379C83D&title_bg=%23555555&title=hits" alt="Hits" style="margin-top: 10px;">
+    <img id="badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fjihan-e.github.io%2Fmachasal%2Fbirthday_albert.html&countColor=%2379C83D" alt="Hits">
+
+    <div class="content">
+        <h2 id="current-date"></h2>
+        <h1>알버트 생일 축하해!</h1>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
